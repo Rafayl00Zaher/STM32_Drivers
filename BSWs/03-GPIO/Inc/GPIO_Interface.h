@@ -13,8 +13,9 @@
 
 
 
+
 /*GPIO Initialization According To Configuration File*/
-void GPIO_Initialization(GPIO_Port_T* Port_CFG);
+void GPIO_Initialization(void);
 
 
 
@@ -30,6 +31,8 @@ void GPIO_Initialization(GPIO_Port_T* Port_CFG);
 	void GPIO_Set_Pin_PUPD(GPIO_Port_Select_T Port , GPIO_Pin_Select_T Pin , Pin_PUPD_T PUPD);
 	// Lock Pin Not taken into consideration unless the Lock Confirmation is Called
 	void GPIO_Lock_Pin(GPIO_Port_Select_T Port , GPIO_Pin_Select_T Pin);
+	// UnLock Pin If the Port Locked Already this function has no effect
+	void GPIO_Unlock_Pin(GPIO_Port_Select_T Port, GPIO_Pin_Select_T Pin);
 	// Save The Edit caused by Lock_Pin And Confirm Port Lock (Write Lock Sequence) Require MCU Reset To Undo
 	void GPIO_Port_Lock_Confirmation(GPIO_Port_Select_T Port);
 	// Choose AF0 -> AF15 According to the Used AF at the Pin
@@ -40,7 +43,7 @@ void GPIO_Initialization(GPIO_Port_T* Port_CFG);
 /*Interface Prototypes Section*/
 	// Used To Set Individual Pin Value
 	void GPIO_Set_Pin_Value(GPIO_Port_Select_T Port , GPIO_Pin_Select_T Pin , Pin_Value_T Value );
-	// Used To Toggel Individual Pin Value
+	// Used To Toggle Individual Pin Value
 	void GPIO_Toggle_Pin(GPIO_Port_Select_T Port , GPIO_Pin_Select_T Pin );
 	// Used To Set The Entire Port Value
 	void GPIO_Set_Port_Value(GPIO_Port_Select_T Port , u16 Value);
@@ -49,4 +52,5 @@ void GPIO_Initialization(GPIO_Port_T* Port_CFG);
 	// Used To Get The Entire Port Value
 	u16 GPIO_Get_Port_Value(GPIO_Port_Select_T Port);
 
-#endif
+
+	#endif

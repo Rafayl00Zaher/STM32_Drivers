@@ -8,17 +8,22 @@
 #ifndef GPIO_PRIVATE_H
 #define GPIO_PRIVATE_H
 
+
+#define GPIO_PORT_NUMBER	11
+#define GPIO_PIN_NUMBER 	16
+
+
 /*Private Types Section*/
 
 	/*Used as Function Parameter If Needed*/
 	typedef enum{
-		GPIO_PORT_A , GPIO_PORT_B , GPIO_PORT_C ,GPIO_PORT_D ,GPIO_PORT_E ,GPIO_PORT_F ,GPIO_PORT_G ,
+		GPIO_PORT_A=0 , GPIO_PORT_B , GPIO_PORT_C ,GPIO_PORT_D ,GPIO_PORT_E ,GPIO_PORT_F ,GPIO_PORT_G ,
 		GPIO_PORT_H ,GPIO_PORT_I ,GPIO_PORT_J ,GPIO_PORT_K
 	} GPIO_Port_Select_T;
 
 	/*Used as Function Parameter If Needed*/
 	typedef enum{
-		GPIO_PIN_1 , GPIO_PIN_2 , GPIO_PIN_3 , GPIO_PIN_4 , GPIO_PIN_5 , GPIO_PIN_6 , GPIO_PIN_7 , GPIO_PIN_8 ,
+		GPIO_PIN_1=0 , GPIO_PIN_2 , GPIO_PIN_3 , GPIO_PIN_4 , GPIO_PIN_5 , GPIO_PIN_6 , GPIO_PIN_7 , GPIO_PIN_8 ,
 		GPIO_PIN_9 , GPIO_PIN_10 , GPIO_PIN_11 , GPIO_PIN_12 , GPIO_PIN_13 , GPIO_PIN_14 , GPIO_PIN_15 , GPIO_PIN_16
 	}GPIO_Pin_Select_T;
 
@@ -57,22 +62,22 @@
 
 	/*Used To Select the source of the signal in case of Alternative Function is selected for this Pin */
 	typedef enum {
-		AF0,	//				System
-		AF1,	//				(TIM1/TIM2)
-		AF2,	//				(TIM3..5)
-		AF3,	//				(TIM8..11)
-		AF4,	//				(I2C1..3)
-		AF5,	//				(SPI1/2/3/4/5/6)
-		AF6,	//				(SPI2/3/SAI1)
-		AF7,	//				(USART1..3)
-		AF8,	//				(USART4..8)
-		AF9,	//				(CAN1/CAN2, LTDC, TIM12..14)
-		AF10,	//				(OTG_FS, OTG_HS)
-		AF11,	//				(ETH)
-		AF12,	//				(FMC, SDIO, OTG_HS)
-		AF13,	//				(DCMI)
-		AF14,	//				(LTDC)
-		AF15	//				(EVENTOUT)
+		AF0=0,		//				System
+		AF1=1,		//				(TIM1/TIM2)
+		AF2=2,		//				(TIM3..5)
+		AF3=3,		//				(TIM8..11)
+		AF4=4,		//				(I2C1..3)
+		AF5=5,		//				(SPI1/2/3/4/5/6)
+		AF6=6,		//				(SPI2/3/SAI1)
+		AF7=7,		//				(USART1..3)
+		AF8=8,		//				(USART4..8)
+		AF9=9,		//				(CAN1/CAN2, LTDC, TIM12..14)
+		AF10=10,	//				(OTG_FS, OTG_HS)
+		AF11=11,	//				(ETH)
+		AF12=12,	//				(FMC, SDIO, OTG_HS)
+		AF13=13,	//				(DCMI)
+		AF14=14,	//				(LTDC)
+		AF15=15		//				(EVENTOUT)
 	} Pin_MUX_T;
 
 	/*Used To Set Initial Value to Pin in-case of it is configured as Output*/
@@ -82,9 +87,10 @@
 
 	/*Used to contain all configuration related to each Pin*/
 	typedef struct {
+		GPIO_Pin_Select_T Pin_Name;
 		Pin_Lock_T Pin_Lock;
 		Pin_Type_T Pin_Type;
-		Pin_Output_Type_T Pin_Output;
+		Pin_Output_Type_T Pin_Output_Type;
 		Pin_Output_Speed_T Pin_Output_Speed;
 		Pin_PUPD_T Pin_PUPD;
 		Pin_MUX_T Pin_MUX;
@@ -93,9 +99,10 @@
 
 	/*Used to contain all Configuration related to each Port*/
 	typedef struct {
+		GPIO_Port_Select_T Port_Name;
 		u32 Base_Address;
 		Port_Lock_T Port_Lock;
-		GPIO_Pin_T GPIO_Pin;
+		GPIO_Pin_T GPIO_Pin [GPIO_PIN_NUMBER];
 	}GPIO_Port_T;
 
 
